@@ -1,6 +1,7 @@
 {
     "name": "sopheos/pebble_swagger",
     "description": "Swagger",
+    "license": "MIT",
     "require": {
         "php": ">=8.1.0"
     },
