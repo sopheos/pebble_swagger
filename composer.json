@@ -1,0 +1,17 @@
+{
+    "name": "sopheos/pebble_swagger",
+    "description": "Swagger",
+    "require": {
+        "php": ">=8.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pebble\\Swagger\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
