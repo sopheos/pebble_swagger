@@ -34,7 +34,7 @@ class SchemaParser
     {
         try {
             $classname = '/' . trim($this->namespace . '/' . $name, '/');
-            $classname = str_replace('/', '\\', $this->namespace . '/' . $name);
+            $classname = str_replace('/', '\\', $classname);
             $reflection = new \ReflectionClass($classname);
         } catch (ReflectionException $ex) {
             return null;
