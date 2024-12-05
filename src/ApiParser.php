@@ -242,11 +242,40 @@ class ApiParser
             $this->error("oa-res", "format is not valid");
         }
 
+        if (($multi = !!preg_match("/\[\]$/", $ref))) {
+            $ref = mb_substr($ref, 0, -2);
+        }
+
         if (!$this->parsers->get($ref)) {
             $this->error('oa-res', $ref, 'not found');
         }
 
-        return [$code, self::schemaRef($ref, $doc->text(2))];
+        $desc = $doc->text(2);
+        $schema = $multi ? self::schemaRefs($ref, $desc) : self::schemaRef($ref, $desc);
+
+        return [$code, $schema];
+    }
+
+    private static function schemaRefs(string $name, string $description): array
+    {
+        $data = [
+            'content' => [
+                'application/json' => [
+                    'schema' => [
+                        "type" => "array",
+                        "items" => [
+                            '$ref' => '#/components/schemas/' . str_replace('/', '_', $name)
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        if ($description) {
+            $data['description'] = $description;
+        }
+
+        return $data;
     }
 
     private static function schemaRef(string $name, string $description): array

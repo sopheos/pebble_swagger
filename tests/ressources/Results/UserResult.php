@@ -7,7 +7,6 @@ namespace App\Results;
  * oa-field id integer Identifiant
  * oa-field name string Nom
  * oa-ref location Sub/LocationResult
+ * oa-refs points Sub/PointResult
  */
-class UserResult
-{
-}
+class UserResult {}
