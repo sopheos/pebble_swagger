@@ -330,13 +330,13 @@ class ApiParser
 
         $namespace = '';
         $matches = [];
-        if (preg_match("/\s*namespace\s*([^;]+)/ui", $content, $matches)) {
+        if (preg_match("/\nnamespace\s*([^;]+)/ui", $content, $matches)) {
             $namespace = "\\" . trim($matches[1], "\\");
         }
 
         $classname = '';
         $matches = [];
-        if (preg_match("/\s*class\s*([^\s]+)/ui", $content, $matches)) {
+        if (preg_match("/\nclass\s*([^\s]+)/ui", $content, $matches)) {
             $classname = $matches[1];
         }
 
