@@ -167,7 +167,7 @@ class ApiParser
         }
     }
 
-    private function parseParam(string $in, DocEntity $doc, array $required = [])
+    private function parseParam(string $in, DocEntity $doc, array $required = []): array
     {
         $name = $name = $doc->value(0);
         $type = $doc->value(1);
@@ -193,7 +193,7 @@ class ApiParser
         return $parameter;
     }
 
-    private function parseMultipart(DocEntity $doc)
+    private function parseMultipart(DocEntity $doc): array
     {
         $name = $name = $doc->value(0);
         $type = $doc->value(1);
@@ -210,7 +210,7 @@ class ApiParser
         return [$name, $schema];
     }
 
-    private function parseForm(DocEntity $doc)
+    private function parseForm(DocEntity $doc): array
     {
         if (!($ref = $doc->value(0))) {
             $this->error('oa-json', 'format is not valid');
@@ -223,7 +223,7 @@ class ApiParser
         return self::schemaRef($ref, $doc->text(1));
     }
 
-    private function parseCode(DocEntity $doc)
+    private function parseCode(DocEntity $doc): array
     {
         if (!($code = $doc->value(0))) {
             $this->error("oa-code", "format is not valid");
@@ -232,7 +232,7 @@ class ApiParser
         return [$code, ['description' => $doc->text(1)]];
     }
 
-    private function parseResult(DocEntity $doc)
+    private function parseResult(DocEntity $doc): array
     {
         if (!($code = $doc->value(0))) {
             $this->error("oa-res", "format is not valid");
@@ -297,7 +297,7 @@ class ApiParser
         return $data;
     }
 
-    private function error(...$messages)
+    private function error(string ...$messages)
     {
         throw Exception::create("{$this->classname}:{$this->methodname}", ...$messages);
     }
@@ -324,7 +324,7 @@ class ApiParser
         return $classnames;
     }
 
-    public static function getClass(string $filename)
+    public static function getClass(string $filename): ?string
     {
         $content = file_get_contents($filename);
 

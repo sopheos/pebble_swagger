@@ -9,11 +9,7 @@ class DocCollection implements \Countable
      */
     protected $data = [];
 
-    /**
-     * @param string $doc
-     * @return \static
-     */
-    public static function create(string $doc)
+    public static function create(string $doc): static
     {
         $doc = str_replace("\r", "", $doc);
 
@@ -35,11 +31,7 @@ class DocCollection implements \Countable
         return $docs;
     }
 
-    /**
-     * @param DocEntity $doc
-     * @return \static
-     */
-    public function add(DocEntity $doc)
+    public function add(DocEntity $doc): static
     {
         $this->data[] = $doc;
         return $this;
@@ -58,7 +50,7 @@ class DocCollection implements \Countable
      * @param string $name
      * @return DocEntity|null
      */
-    public function one(string $name)
+    public function one(string $name): ?DocEntity
     {
         foreach ($this->data as $doc) {
             if ($doc->name === $name) return $doc;
@@ -68,7 +60,6 @@ class DocCollection implements \Countable
     }
 
     /**
-     * @param string $name
      * @return DocEntity[]
      */
     public function all(string $name)
@@ -86,7 +77,7 @@ class DocCollection implements \Countable
         return count($this->data);
     }
 
-    public function parseMultiline(string $name, $sep = "\n")
+    public function parseMultiline(string $name, $sep = "\n"): string
     {
         $text = '';
         foreach ($this->all($name) as $doc) {
@@ -119,7 +110,7 @@ class DocCollection implements \Countable
         return $schema;
     }
 
-    private static function parseFormat(string $format, array $schema)
+    private static function parseFormat(string $format, array $schema): array
     {
         if (!$format) {
             return $schema;

@@ -27,49 +27,31 @@ class Parser
         $this->jwtTokens(true, 'accessToken');
     }
 
-    /**
-     * @param array $config
-     * @return \static
-     */
-    public static function create(string $path)
+
+    public static function create(string $path): static
     {
         return new static($path);
     }
 
-    /**
-     * @param string $value
-     * @return \static
-     */
-    public function title(string $title)
+    public function title(string $title): static
     {
         $this->json['info']['title'] = $title;
         return $this;
     }
 
-    /**
-     * @param string $value
-     * @return \static
-     */
-    public function description(string $value)
+    public function description(string $value): static
     {
         $this->json['info']['description'] = $value;
         return $this;
     }
 
-    /**
-     * @param string $value
-     * @return \static
-     */
-    public function version(string $value)
+    public function version(string $value): static
     {
         $this->json['info']['version'] = $value;
         return $this;
     }
 
-    /**
-     * @return \static
-     */
-    public function servers(...$values)
+    public function servers(mixed ...$values): static
     {
         $this->json['servers'] = [];
         foreach ($values as $value) {
@@ -78,7 +60,7 @@ class Parser
         return $this;
     }
 
-    public function jwtTokens(bool $global = true, ...$names): static
+    public function jwtTokens(bool $global = true, mixed ...$names): static
     {
         $this->json['security'] = null;
         $this->json['components']['securitySchemes'] = null;
