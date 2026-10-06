@@ -25,6 +25,6 @@ function loadRessources()
             $include($file->getPathname());
         }
     }
-};
+}
 
-loadRessources(__DIR__ . '/ressources');
+loadRessources();
